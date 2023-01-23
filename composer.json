@@ -1,0 +1,18 @@
+{
+  "name": "blackbit_digital_commerce/pimcore-better-search",
+  "description": "Drop-in replacement for Pimcore backend search",
+  "version": "1.0.0",
+  "support": {
+    "source": "https://shop.blackbit.com/"
+  },
+  "homepage": "https://pimcore.blackbit.com",
+  "license": "GPL-3.0-or-later",
+  "type": "pimcore-bundle",
+  "authors": [
+    {
+      "name": "Blackbit",
+      "email": "info@blackbit.de",
+      "role": "Developer"
+    }
+  ]
+}
