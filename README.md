@@ -42,7 +42,7 @@ This bundle uses [TNT Search](https://github.com/teamtnt/tntsearch) as underlyin
 
 ### Composer
 
-To get the plugin code you have to buy the plugin or write an email to [info@blackbit.de](mailto:info@blackbit.de).
+To get the plugin code you have to [buy the plugin](https://shop.blackbit.com/pimcore-better-search/) or write an email to [info@blackbit.de](mailto:info@blackbit.de).
 
 You then either get access to the bundle's [Bitbucket repository](https://bitbucket.org/blackbitwerbung/pimcore-plugins-better-search) or you get the plugin code as a zip file. Accessing the Bitbucket repository has the advantage that you will always see changes to the plugin in the pull requests and are able to update to a new version yourself - please visit [this page](https://shop.blackbit.de/de/service-xt-commerce/bitbucket-zugriff-xt-commerce-plugin-entwicklung) if this sounds interesting to you - if it does, please send us the email address of your BitBucket account so we can allow access to the repository.
 
