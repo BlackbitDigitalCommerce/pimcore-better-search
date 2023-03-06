@@ -1,8 +1,8 @@
 # Pimcore Better Search
 
-For efficient data maintenance it is mandatory to have an efficient search. This bundle replaces Pimcore's backend search functionality to offer a search experience like users know from popular web search engines.
+For efficient data maintenance it is mandatory to have an efficient search. This bundle is a drop-in replacement for Pimcore's default backend search. It offers a search experience like users know from popular web search engines.
 
-It does not need any configuration or external applications to be installed.
+It does not need any configuration nor external applications to be installed.
 
 ## Problems with Pimcore's built-in search functionality
 
@@ -37,6 +37,8 @@ This bundle uses [TNT Search](https://github.com/teamtnt/tntsearch) as underlyin
 - implements [TF/IDF algorithm](https://en.wikipedia.org/wiki/Tf%E2%80%93idf) to better sort search results
 - implements n-gram search
   - for use with languages like Chinese / Japanese which do not have word separators
+
+The plugin works as a drop-in replacement for Pimcore's search features: In the user interface everything will work the same as with default Pimcore. Only the underlying indexing and search logic gets changed.
 
 ## Installation
 
