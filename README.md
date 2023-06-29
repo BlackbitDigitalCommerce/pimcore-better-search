@@ -15,15 +15,15 @@ Pimcore provides an object search in
 All of these places share the same underlying search engine and thus the same problems:
 
 - by default (without MySQL's search operators) only word search is supported
-  - e.g. searching `product` will not find a data object which only contains `products`
+    - e.g. searching `product` will not find a data object which only contains `products`
 - terms with less than 3 characters get ignored (with MySQL's default `innodb_ft_min_token_size` setting)
-  - e.g. searching for `CD` will never find anything
+    - e.g. searching for `CD` will never find anything
 - there is no fuzzy search which searches tolerating typo errors
-  - e.g. searching for `produt` will not find `product`
+    - e.g. searching for `produt` will not find `product`
 - there is no word-stemming
-  - e.g. searching for `shirts` (plural) will not find an object which contains `shirt`
+    - e.g. searching for `shirts` (plural) will not find an object which contains `shirt`
 - sometimes order of search results is irritating
-  - e.g. elements which contain the search term only once get listed higher than those which contain it multiple times
+    - e.g. elements which contain the search term only once get listed higher than those which contain it multiple times
 - search is unusable for languages which do not have word separators (like Chinese, Japanese)
 
 ## What does the plugin do different?
@@ -36,9 +36,16 @@ This bundle uses [TNT Search](https://github.com/teamtnt/tntsearch) as underlyin
 - implements word-stemming for many languages
 - implements [TF/IDF algorithm](https://en.wikipedia.org/wiki/Tf%E2%80%93idf) to better sort search results
 - implements n-gram search
-  - for use with languages like Chinese / Japanese which do not have word separators
+    - for use with languages like Chinese / Japanese which do not have word separators
 
-The plugin works as a drop-in replacement for Pimcore's search features: In the user interface everything will work the same as with default Pimcore. Only the underlying indexing and search logic gets changed.
+The plugin works as a drop-in replacement for Pimcore's search features: In the user interface everything will look the same as with default Pimcore. Only the underlying indexing and search logic gets changed.
+
+## SQL mode
+
+You can also add filter conditions via SQL by prepending your query with a `/`, e.g. `/SKU IN (1234,2345,3456)` will return exactly the 3 specified items. For grid searches this feature was available until Pimcore 10 but it never was for relation search. With this feature it is easy to add multiple
+items to a relation.
+
+And for Pimcore >= 11, this also brings back the SQL filters in the grid.
 
 ## Installation
 
@@ -46,7 +53,8 @@ The plugin works as a drop-in replacement for Pimcore's search features: In the 
 
 To get the plugin code you have to [buy the plugin](https://shop.blackbit.com/pimcore-better-search/) or write an email to [info@blackbit.de](mailto:info@blackbit.de).
 
-You then either get access to the bundle's [Bitbucket repository](https://bitbucket.org/blackbitwerbung/pimcore-plugins-better-search) or you get the plugin code as a zip file. Accessing the Bitbucket repository has the advantage that you will always see changes to the plugin in the pull requests and are able to update to a new version yourself - please visit [this page](https://shop.blackbit.de/de/service-xt-commerce/bitbucket-zugriff-xt-commerce-plugin-entwicklung) if this sounds interesting to you - if it does, please send us the email address of your BitBucket account so we can allow access to the repository.
+You then either get access to the bundle's [Bitbucket repository](https://bitbucket.org/blackbitwerbung/pimcore-plugins-better-search) or you get the plugin code as a zip file. Accessing the Bitbucket repository has the advantage that you will always see changes to the plugin in the pull requests
+and are able to update to a new version yourself - please visit [this page](https://shop.blackbit.com/bitbucket-access-to-blackbit-plugin-development/) if this sounds interesting to you - if it does, please send us the email address of your BitBucket account so we can allow access to the repository.
 
 When we allow your account to access our repository, please add the repository to the `composer.json` in your Pimcore root folder (see [Composer repositories](https://getcomposer.org/doc/05-repositories.md#vcs)):
 
@@ -79,3 +87,12 @@ Then you should be able to execute `composer require blackbit/better-search` (or
 At last you have to enable and install the plugin, either via browser UI or via CLI `bin/console pimcore:bundle:enable BlackbitBetterSearchBundle && bin/console pimcore:bundle:install BlackbitBetterSearchBundle`
 
 You can always access the latest version by executing `composer update blackbit/better-search --with-dependencies` on CLI.
+
+## Recreate search index
+
+By default during installation a background process will get started which indexes the data of all existing Pimcore elements.
+
+Whenever an element gets saved, the search index gets updated (the same way as Pimcore does it by default).
+
+To manually recreate the search index, you can execute the CLI command
+`bin/console better-search:create-index`
